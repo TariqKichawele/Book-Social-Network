@@ -3,6 +3,7 @@ package com.tariq.book.user;
 import com.tariq.book.role.Role;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -19,7 +20,7 @@ import java.util.stream.Collectors;
 
 @Getter
 @Setter
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -54,17 +55,11 @@ public class User implements UserDetails, Principal {
     private LocalDateTime lastModifiedDate;
 
 
-
-    @Override
-    public String getName() {
-        return email;
-    }
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return this.roles
                 .stream()
-                .map(role -> new SimpleGrantedAuthority(role.getName()))
+                .map(r -> new SimpleGrantedAuthority(r.getName()))
                 .collect(Collectors.toList());
     }
 
@@ -98,8 +93,16 @@ public class User implements UserDetails, Principal {
         return enabled;
     }
 
-    private String fullName() {
-        return firstname + " " + lastname;
+    public String fullName() {
+        return getFirstname() + " " + getLastname();
     }
 
+    @Override
+    public String getName() {
+        return email;
+    }
+
+    public String getFullName() {
+        return firstname + " " + lastname;
+    }
 }

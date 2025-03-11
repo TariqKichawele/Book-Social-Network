@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc.postgresql://localhost:5432/book_social_network
+    url: jdbc:postgresql://localhost:5432/book_social_network
     username: username
     password: password
     driver-class-name: org.postgresql.Driver
@@ -13,7 +13,7 @@ spring:
       hibernate:
         format-sql: true
     database: postgresql
-    database-platform: org.hibernate.dialect.PostgresSQLDialect
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
 
   mail:
     host: localhost
@@ -31,8 +31,14 @@ spring:
         timeout: 3000
         write-timeout: 5000
 
-  application:
-    security:
-      jwt:
-        secret-key: 593b7d67be8eb40dc89b99cdddfe0b2a916d050a7c0df88f89866d480cfec3012fb4bfe1ec7ad6f5d08e3ca6b3d854d190320b63d5a6936def5d0b84e1114799
-        expiration: 1800000
+application:
+  security:
+    jwt:
+      secret-key: 593b7d67be8eb40dc89b99cdddfe0b2a916d050a7c0df88f89866d480cfec3012fb4bfe1ec7ad6f5d08e3ca6b3d854d190320b63d5a6936def5d0b84e1114799
+      expiration: 1800000
+  mailing:
+    frontend:
+      activation-url: http://localhost:4200/activate-account
+
+server:
+  port: 8088

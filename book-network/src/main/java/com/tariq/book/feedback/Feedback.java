@@ -1,4 +1,4 @@
-package com.tariq.book.book;
+package com.tariq.book.feedback;
 
 import com.tariq.book.common.BaseEntity;
 import jakarta.persistence.*;
@@ -14,14 +14,9 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Book extends BaseEntity {
+public class Feedback extends BaseEntity {
 
-    private String title;
-    private String authorName;
-    private String isbn;
-    private String synopsis;
-    private String bookCover;
-    private boolean archived;
-    private boolean shareable;
+    private Double note;
+    private String comment;
 
 }

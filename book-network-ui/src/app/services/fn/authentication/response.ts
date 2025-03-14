@@ -10,13 +10,13 @@ import { RequestBuilder } from '../../request-builder';
 
 import { RegistrationRequest } from '../../models/registration-request';
 
-export interface Response$Params {
+export interface Register$Params {
       body: RegistrationRequest
 }
 
-export function response(http: HttpClient, rootUrl: string, params: Response$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+export function register(http: HttpClient, rootUrl: string, params: Register$Params, context?: HttpContext): Observable<StrictHttpResponse<{
 }>> {
-  const rb = new RequestBuilder(rootUrl, response.PATH, 'post');
+  const rb = new RequestBuilder(rootUrl, register.PATH, 'post');
   if (params) {
     rb.body(params.body, 'application/json');
   }
@@ -32,4 +32,4 @@ export function response(http: HttpClient, rootUrl: string, params: Response$Par
   );
 }
 
-response.PATH = '/auth/register';
+register.PATH = '/auth/register';

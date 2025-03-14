@@ -16,8 +16,7 @@ import { Authenticate$Params } from '../fn/authentication/authenticate';
 import { AuthenticationResponse } from '../models/authentication-response';
 import { confirm } from '../fn/authentication/confirm';
 import { Confirm$Params } from '../fn/authentication/confirm';
-import { response } from '../fn/authentication/response';
-import { Response$Params } from '../fn/authentication/response';
+import { Register$Params, register } from '../fn/authentication/response';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService extends BaseService {
@@ -34,25 +33,25 @@ export class AuthenticationService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  response$Response(params: Response$Params, context?: HttpContext): Observable<StrictHttpResponse<{
-}>> {
-    return response(this.http, this.rootUrl, params, context);
-  }
-
-  /**
-   * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `response$Response()` instead.
-   *
-   * This method sends `application/json` and handles request body of type `application/json`.
-   */
-  response(params: Response$Params, context?: HttpContext): Observable<{
-}> {
-    return this.response$Response(params, context).pipe(
-      map((r: StrictHttpResponse<{
-}>): {
-} => r.body)
-    );
-  }
+  register$Response(params: Register$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+  }>> {
+      return register(this.http, this.rootUrl, params, context);
+    }
+  
+    /**
+     * This method provides access only to the response body.
+     * To access the full response (for headers, for example), `register$Response()` instead.
+     *
+     * This method sends `application/json` and handles request body of type `application/json`.
+     */
+    register(params: Register$Params, context?: HttpContext): Observable<{
+  }> {
+      return this.register$Response(params, context).pipe(
+        map((r: StrictHttpResponse<{
+  }>): {
+  } => r.body)
+      );
+    }
 
   /** Path part for operation `authenticate()` */
   static readonly AuthenticatePath = '/auth/authenticate';
